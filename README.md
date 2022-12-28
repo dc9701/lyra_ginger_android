@@ -1,1 +1,1 @@
-# lyra_ginger_sample
+# lyra_ginger_android
