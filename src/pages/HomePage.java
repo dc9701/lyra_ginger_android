@@ -9,40 +9,43 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
     protected WebDriver driver;
 
-    final String NOT_STARTED = "not_started";
-    final String OPEN = "open";
-    final String IN_PROGRESS = "in_progress";
-    final String FINISHED = "finished";
-
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        if (!homePageTitle.isDisplayed()) {
+        if (! homePageTitle.isDisplayed()) {
             throw new IllegalStateException("This is not the HomePage;" +
                     " current page is: " + driver.getCurrentUrl());
         }
     }
 
-    /*
-     * Page actions used in tests.
-     */
-
-    /*
-     * PageFactory elements used in page actions and test assertions.
-     */
-
-    @FindBy(how = How.XPATH, using = "//android.view.View[contains(@content-desc,'Home')]")
+    @FindBy(how = How.XPATH, using = "//android.view.View[contains(@content-desc,\"Home\")]")
     public WebElement homePageTitle;
 
-    @FindBy(how = How.XPATH, using = "//android.view.View[contains(@content-desc,'Getting Started')]")
-    public WebElement lessonGettingStarted;
+    @FindBy(how = How.XPATH, using = "//android.view.View[contains(@content-desc,\"EXPLORE ALL\")]")
+    public WebElement homeExploreAll;
+
+    @FindBy(how = How.XPATH, using = "//android.view.View[contains(@content-desc,\"Viewed\")]")
+    public WebElement homeViewed;
+
+    @FindBy(how = How.XPATH, using = "//android.widget.Button[contains(@content-desc,\"Begin\")]")
+    public WebElement lessonPanelBegin;
+
+    @FindBy(how = How.XPATH, using = "//android.widget.Button[contains(@content-desc,\"back\")]")
+    public WebElement lessonPanelBack;
+
+    @FindBy(how = How.XPATH, using = "//android.widget.Button[contains(@content-desc,\"close\")]")
+    public WebElement lessonPanelClose;
+
+    @FindBy(how = How.XPATH, using = "//android.widget.Button[contains(@content-desc,\"next\")]")
+    public WebElement lessonPanelNext;
+
+    @FindBy(how = How.XPATH, using = "//android.widget.Button[contains(@content-desc,\"Finish\")]")
+    public WebElement lessonPanelFinish;
 
     public String jsonLessons = """
     [
         {
             "title": "Getting Started: What is Ginger coaching?",
-            "bookmarked": false,
-            "breadcrumbs": [0],
             "panels": [
                 {"assertText": "Getting Started: What is Ginger Coaching?", "navigation": [{"action": ["Begin"], "panel": 1}]},
                 {"assertText": "What is Ginger Coaching?", "navigation": []},
@@ -60,8 +63,6 @@ public class HomePage {
         },
         {
             "title": "Take a Mental Health Break From the News",
-            "bookmarked": false,
-            "breadcrumbs": [0],
             "panels": [
                 {"assertText": "Take a Mental Health Break From the News",  "navigation": [{"action": ["Begin"], "panel": 1}]},
                 {"assertText": "(1) Pay attention to how the news makes you feel as you engage with it, and afterward.", "navigation": []},
@@ -71,8 +72,6 @@ public class HomePage {
         },
         {
             "title": "Identifying Automatic Thoughts",
-            "bookmarked": false,
-            "breadcrumbs": [0],
             "panels": [
                 {"assertText": "Identifying Automatic Thoughts", "navigation": [{"action": ["Begin"], "panel": 1}]},
                 {"assertText": "Choose one of these automatic thoughts that you've had.", "navigation": [
